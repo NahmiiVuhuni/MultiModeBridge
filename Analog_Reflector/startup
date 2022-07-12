@@ -1,0 +1,16 @@
+#!/bin/ash
+
+# TODO: This if statement doesn't work, it always just generates new keys at startup. For now this works.
+
+mkdir -p /app/ssl
+cd /app/ssl
+
+if [ ! -f dvswitch.crt || ! -f dvswitch.key ]; then
+    apk --no-cache add openssl
+    openssl req -newkey rsa:2048 -nodes -keyout dvswitch.key \
+    -x509 -out dvswitch.crt \
+    -subj "/C=US/ST=Denial/L=Springfield/O=Dis/CN=www.example.com"
+    apk --no-cache del openssl
+fi
+
+cd /app
