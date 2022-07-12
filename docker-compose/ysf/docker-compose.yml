@@ -1,0 +1,56 @@
+services:
+  ysf_analog_bridge:
+    container_name: YSF-Analog_Bridge
+    image: w3fur/analog_bridge
+    restart: unless-stopped
+    volumes:
+    - /data/YSF/Analog_Bridge.ini:/data/Analog_Bridge.ini
+    hostname: YSF_Analog_Bridge
+    networks:
+      main:
+        ipv4_address: 172.19.40.41
+      ysf:
+        ipv4_address: 172.19.41.1
+  ysf_mmdvm_bridge:
+    container_name: YSF-MMDVM_Bridge
+    image: w3fur/mmdvm_bridge
+    restart: unless-stopped
+    volumes:
+    - /data/YSF/MMDVM_Bridge.ini:/data/MMDVM_Bridge.ini
+    - /data/YSF/DVSwitch.ini:/data/DVSwitch.ini
+    hostname: YSF_MMDVM_Bridge
+    networks:
+      ysf:
+        ipv4_address: 172.19.41.2
+  ysf_reflector:
+    container_name: YSFReflector
+    image: w3fur/ysf_reflector:alpine
+    restart: unless-stopped
+    ports:
+    - 42000:42000/udp
+    volumes:
+    - /data/YSF/YSFReflector.ini:/data/YSFReflector.ini
+    hostname: YSFReflector
+    networks:
+      ysf:
+        ipv4_address: 172.19.41.3
+      nxdn:
+        ipv4_address: 172.19.43.1
+  md380emu:
+    container_name: MD380emu
+    image: w3fur/md380emu:alpine
+    restart: unless-stopped
+    hostname: MD380emu
+    networks:
+      ysf:
+        ipv4_address: 172.19.41.11
+networks:
+  main:
+    name: main
+    external: true
+  ysf:
+    name: ysf
+    external: true
+  nxdn:
+    name: nxdn
+    external: true

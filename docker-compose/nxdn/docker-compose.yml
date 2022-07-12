@@ -1,0 +1,39 @@
+services:
+  nxdn_mmdvm_bridge:
+    container_name: NXDN-MMDVM_Bridge
+    image: w3fur/mmdvm_bridge
+    restart: unless-stopped
+    volumes:
+    - /data/NXDN/MMDVM_Bridge.ini:/data/MMDVM_Bridge.ini
+    - /data/NXDN/DVSwitch.ini:/data/DVSwitch.ini
+    hostname: NXDN_MMDVM_Bridge
+    networks:
+      nxdn:
+        ipv4_address: 172.19.43.2
+  nxdn_gateway:
+    container_name: NXDNGateway
+    image: w3fur/nxdn_gateway:alpine
+    restart: unless-stopped
+    volumes:
+    - /data/NXDN/NXDNGateway.ini:/data/NXDNGateway.ini
+    - /data/NXDN/NXDNHosts-private.txt:/data/private/NXDNHosts.txt
+    hostname: NXDNGateway
+    networks:
+      nxdn:
+        ipv4_address: 172.19.43.3
+  nxdn_reflector:
+    container_name: NXDNReflector
+    image: w3fur/nxdn_reflector:alpine
+    restart: unless-stopped
+    ports:
+    - 41400:41400/udp
+    volumes:
+    - /data/NXDN/NXDNReflector.ini:/data/NXDNReflector.ini
+    hostname: NXDNReflector
+    networks:
+      nxdn:
+        ipv4_address: 172.19.43.4
+networks:
+  nxdn:
+    name: nxdn
+    external: true

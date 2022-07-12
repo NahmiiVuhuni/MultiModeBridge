@@ -1,0 +1,15 @@
+services:
+  analog_reflector:
+    container_name: AnalogReflector
+    image: w3fur/analog_reflector:alpine
+    restart: unless-stopped
+    volumes:
+      - /data/Analog_Reflector.json:/data/Analog_Reflector.json
+    hostname: AnalogReflector
+    networks:
+      main:
+        ipv4_address: 172.19.40.1
+networks:
+  main:
+    name: main
+    external: true

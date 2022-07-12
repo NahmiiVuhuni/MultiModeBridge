@@ -1,0 +1,54 @@
+services:
+  p25_analog_bridge:
+    container_name: P25-Analog_Bridge
+    image: w3fur/analog_bridge
+    restart: unless-stopped
+    volumes:
+    - /data/P25/Analog_Bridge.ini:/data/Analog_Bridge.ini
+    hostname: P25_Analog_Bridge
+    networks:
+      main:
+        ipv4_address: 172.19.40.42
+      p25:
+        ipv4_address: 172.19.42.1
+  p25_mmdvm_bridge:
+    container_name: P25-MMDVM_Bridge
+    image: w3fur/mmdvm_bridge
+    restart: unless-stopped
+    volumes:
+    - /data/P25/MMDVM_Bridge.ini:/data/MMDVM_Bridge.ini
+    - /data/P25/DVSwitch.ini:/data/DVSwitch.ini
+    hostname: P25_MMDVM_Bridge
+    networks:
+      p25:
+        ipv4_address: 172.19.42.2
+  p25_gateway:
+    container_name: P25Gateway
+    image: w3fur/p25_gateway:alpine
+    restart: unless-stopped
+    volumes:
+    - /data/P25/P25Gateway.ini:/data/P25Gateway.ini
+    - /data/P25/P25Hosts-private.txt:/data/private/P25Hosts.txt
+    hostname: P25Gateway
+    networks:
+      p25:
+        ipv4_address: 172.19.42.3
+  p25_reflector:
+    container_name: P25Reflector
+    image: w3fur/p25_reflector:alpine
+    restart: unless-stopped
+    ports:
+    - 41000:41000/udp
+    volumes:
+    - /data/P25/P25Reflector.ini:/data/P25Reflector.ini
+    hostname: P25Reflector
+    networks:
+      p25:
+        ipv4_address: 172.19.42.4
+networks:
+  main:
+    name: main
+    external: true
+  p25:
+    name: p25
+    external: true
