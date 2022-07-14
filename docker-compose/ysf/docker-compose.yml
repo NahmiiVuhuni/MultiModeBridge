@@ -36,11 +36,11 @@ services:
         ipv4_address: 172.19.41.3
       nxdn:
         ipv4_address: 172.19.43.1
-  md380emu:
-    container_name: MD380emu
+  ysf_md380emu:
+    container_name: YSF-MD380emu
     image: w3fur/md380emu:alpine
     restart: unless-stopped
-    hostname: MD380emu
+    hostname: YSF_MD380emu
     networks:
       ysf:
         ipv4_address: 172.19.41.11

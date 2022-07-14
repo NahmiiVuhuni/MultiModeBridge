@@ -1,0 +1,36 @@
+services:
+  m17_usrp2m17:
+    container_name: M17-USRP2M17
+    image: w3fur/usrp2m17:alpine
+    restart: unless-stopped
+    volumes:
+    - /data/M17/USRP2M17.ini:/data/USRP2M17.ini
+    hostname: M17_USRP2M17
+    networks:
+      main:
+        ipv4_address: 172.19.40.44
+      m17:
+        ipv4_address: 172.19.44.1
+  m17_mrefd:
+    container_name: M17-mrefd
+    image: w3fur/mrefd:alpine
+    restart: unless-stopped
+    volumes:
+    - /data/M17/configure.h:/app/configure.h
+    - /data/M17/configure.mk:/app/configure.mk
+    - /data/M17/reflector.cfg:/app/reflector.cfg
+    - /data/M17/mrefd.interlink:/usr/local/etc/mrefd.interlink
+    - /data/M17/mrefd.whitelist:/usr/local/etc/mrefd.whitelist
+    - /data/M17/mrefd.blacklist:/usr/local/etc/mrefd.blacklist
+    hostname: M17_mrefd
+    networks:
+      m17:
+        ipv4_address: 172.19.44.2
+networks:
+  main:
+    name: main
+    external: true
+  m17:
+    name: m17
+    external: true
+

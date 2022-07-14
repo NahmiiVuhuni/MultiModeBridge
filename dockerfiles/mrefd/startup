@@ -1,0 +1,23 @@
+#!/bin/bash
+
+set +x
+if [[ ! -f configure.h ]] || 
+   [[ ! -f configure.mk ]] ||
+   [[ ! -f reflector.cfg ]]; then
+  echo "Error: configure.h, configure.mk, and/or reflector.cfg missing"
+  exit 1
+fi 
+
+if ! sha1sum -c configure.h.sha1 ||
+   ! sha1sum -c configure.mk.sha1 ||
+   ! sha1sum -c reflector.cfg.sha1; then
+  apk --no-cache add build-base --virtual .build
+  make
+  apk --no-cache del .build
+  sha1sum configure.h > configure.h.sha1
+  sha1sum configure.mk > configure.mk.sha1
+  sha1sum reflector.cfg > reflector.cfg.sha1
+fi
+set -x
+
+./mrefd
