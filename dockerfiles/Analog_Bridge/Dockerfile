@@ -12,7 +12,7 @@ ENV TZ=Etc/UTC
 
 RUN set +x \
  && apt-get update && apt-get upgrade -y \
- && apt-get install -y libsndfile1 libasound2 \
+ && apt-get install -y tcpdump libsndfile1 libasound2 \
  && mkdir -p /app /data
 COPY --from=builder /Analog_Bridge/bin/Analog_Bridge.amd64 /app/Analog_Bridge
 

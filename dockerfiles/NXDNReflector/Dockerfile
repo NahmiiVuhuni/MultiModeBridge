@@ -11,7 +11,8 @@ RUN set +x \
 FROM alpine
 
 RUN set +x \
- && apk --no-cache add libgcc libstdc++ \
+ && apk --no-cache update && apk --no-cache upgrade \
+ && apk --no-cache add tcpdump libgcc libstdc++ \
  && mkdir -p /app /data
 COPY --from=builder /NXDNClients/NXDNReflector/NXDNReflector /app/NXDNReflector
 COPY --from=builder /NXDNClients/NXDNReflector/NXDN.csv /app/NXDN.csv

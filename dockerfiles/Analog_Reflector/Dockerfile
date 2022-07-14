@@ -10,8 +10,11 @@ RUN set +x \
 
 FROM alpine
 
+RUN set +x \
+ && apk --no-cache update && apk --no-cache upgrade \
+ && apk --no-cache add tcpdump bash \
+ && mkdir -p /var/log/dvswitch
 COPY --from=builder /Analog_Reflector/opt/Analog_Reflector /app
 COPY startup /startup
-RUN mkdir -p /var/log/dvswitch
 
 CMD /startup

@@ -11,7 +11,8 @@ RUN set +x \
 FROM alpine
 
 RUN set +x \
- && apk --no-cache add libgcc libstdc++ \
+ && apk --no-cache update && apk --no-cache upgrade \
+ && apk --no-cache add tcpdump libgcc libstdc++ \
  && mkdir -p /app /data
 COPY --from=builder /P25Clients/P25Reflector/P25Reflector /app/P25Reflector
 COPY --from=builder /P25Clients/P25Reflector/DMRIds.dat /app/DMRIds.dat

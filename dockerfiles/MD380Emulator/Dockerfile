@@ -14,7 +14,7 @@ FROM alpine
 
 RUN set +x \
  && apk --no-cache update && apk --no-cache upgrade \
- && apk --no-cache add qemu-arm \
+ && apk --no-cache add tcpdump qemu-arm \
  && mkdir -p /app /data
 COPY --from=builder /md380tools/emulator/md380-emu /app/md380-emu
 

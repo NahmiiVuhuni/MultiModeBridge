@@ -8,6 +8,8 @@ RUN set +x \
 FROM debian:bullseye-slim
 
 RUN set +x \
+ && apt-get update && apt-get upgrade -y \
+ && apt-get install tcpdump -y \
  && mkdir -p /app /data /data/log
 COPY --from=builder /MMDVM_Bridge/bin/MMDVM_Bridge.amd64 /app/MMDVM_Bridge
 COPY DMRIds.dat /app/DMRIds.dat
