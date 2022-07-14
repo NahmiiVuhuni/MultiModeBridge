@@ -1,0 +1,26 @@
+services:
+  web_nginx:
+    container_name: web-nginx
+    image: nginx:stable-alpine
+    restart: unless-stopped
+    volumes:
+     - /data/web/nginx/nginx.conf:/etc/nginx/nginx.conf
+     - /data/web/nginx/conf.d:/etc/nginx/conf.d
+     - /data/web/nginx/dhparam.pem:/etc/nginx/dhparam.pem
+     - /etc/letsencrypt:/etc/letsencrypt:ro
+     - /data/web/www:/var/www
+    hostname: web_nginx
+    ports:
+     - 80:80
+     - 443:443
+     - 8080:8080
+     - 8443:8443
+     - 17000:17000
+    networks:
+      web:
+        ipv4_address: 172.19.50.1
+networks:
+  web:
+    name: web
+    external: true
+

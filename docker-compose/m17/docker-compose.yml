@@ -4,7 +4,7 @@ services:
     image: w3fur/usrp2m17:alpine
     restart: unless-stopped
     volumes:
-    - /data/M17/USRP2M17.ini:/data/USRP2M17.ini
+     - /data/M17/USRP2M17.ini:/data/USRP2M17.ini
     hostname: M17_USRP2M17
     networks:
       main:
@@ -16,23 +16,55 @@ services:
     image: w3fur/mrefd:alpine
     restart: unless-stopped
     ports:
-      17000:17000/udp
+     - 17000:17000/udp
     volumes:
-    - /data/M17/configure.h:/app/configure.h
-    - /data/M17/configure.mk:/app/configure.mk
-    - /data/M17/reflector.cfg:/app/reflector.cfg
-    - /data/M17/mrefd.interlink:/usr/local/etc/mrefd.interlink
-    - /data/M17/mrefd.whitelist:/usr/local/etc/mrefd.whitelist
-    - /data/M17/mrefd.blacklist:/usr/local/etc/mrefd.blacklist
+     - /data/M17/configure.h:/app/configure.h
+     - /data/M17/configure.mk:/app/configure.mk
+     - /data/M17/reflector.cfg:/app/reflector.cfg
+     - /data/M17/mrefd.interlink:/usr/local/etc/mrefd.interlink
+     - /data/M17/mrefd.whitelist:/usr/local/etc/mrefd.whitelist
+     - /data/M17/mrefd.blacklist:/usr/local/etc/mrefd.blacklist
+     - /data/M17/web/mrefd.xml:/var/log/mrefd.xml:z
     hostname: M17_mrefd
     networks:
       m17:
         ipv4_address: 172.19.44.2
+  m17_dash_php:
+    container_name: M17-dash-php
+    image: php:7.1-fpm-alpine
+    restart: unless-stopped
+    volumes:
+    - /data/M17/web/php.ini:/usr/local/etc/php/php.ini
+    - /data/M17/web/html:/var/www/html
+    - /data/M17/web/mrefd.xml:/var/log/mrefd.xml:ro,z
+    hostname: M17_dash_php
+    networks:
+      m17:
+        ipv4_address: 172.19.44.3
+  m17_dash_nginx:
+    container_name: M17-dash-nginx
+    image: nginx:stable-alpine
+    restart: unless-stopped
+    volumes:
+     - /data/M17/web/nginx-dash.conf:/etc/nginx/conf.d/default.conf
+     - /data/M17/web/html:/var/www/html
+     - /data/M17/web/mrefd.xml:/var/log/mrefd.xml:ro,z
+    hostname: M17_dash_nginx
+    networks:
+      m17:
+        ipv4_address: 172.19.44.4
+      web:
+        ipv4_address: 172.19.50.44
+    links:
+     - m17_dash_php
 networks:
   main:
     name: main
     external: true
   m17:
     name: m17
+    external: true
+  web:
+    name: web
     external: true
 

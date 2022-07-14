@@ -1,2 +1,2 @@
 # MultiModeBridge
-![Chart of Docker containers](https://i.imgur.com/i7CEIo6.png)
+![Chart of Docker containers](https://lax1.w3fur.radio/container_map.png)
