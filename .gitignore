@@ -1,0 +1,11 @@
+config/AR/users/*
+!config/AR/users/n0call.json
+
+config/M17/web/mrefd.xml
+config/M17/web/html/*
+!config/M17/web/html/include/config.inc.php
+
+config/web/*
+!config/web/nginx/nginx.conf
+!config/web/nginx/conf.d/ar.conf
+!config/web/nginx/conf.d/m17.conf

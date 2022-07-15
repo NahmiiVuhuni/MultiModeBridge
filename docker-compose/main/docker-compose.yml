@@ -4,7 +4,9 @@ services:
     image: w3fur/analog_reflector:alpine
     restart: unless-stopped
     volumes:
-      - /data/Analog_Reflector.json:/data/Analog_Reflector.json
+     - /data/AR/Analog_Reflector.json:/data/Analog_Reflector.json
+     - /data/AR/users:/app/arRoot/users
+     - /data/AR/modes:/app/arRoot/modes
     hostname: AnalogReflector
     networks:
       main:
@@ -13,3 +15,4 @@ networks:
   main:
     name: main
     external: true
+

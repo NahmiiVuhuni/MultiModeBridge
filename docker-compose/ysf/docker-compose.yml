@@ -4,7 +4,7 @@ services:
     image: w3fur/analog_bridge
     restart: unless-stopped
     volumes:
-    - /data/YSF/Analog_Bridge.ini:/data/Analog_Bridge.ini
+     - /data/YSF/Analog_Bridge.ini:/data/Analog_Bridge.ini
     hostname: YSF_Analog_Bridge
     networks:
       main:
@@ -16,8 +16,8 @@ services:
     image: w3fur/mmdvm_bridge
     restart: unless-stopped
     volumes:
-    - /data/YSF/MMDVM_Bridge.ini:/data/MMDVM_Bridge.ini
-    - /data/YSF/DVSwitch.ini:/data/DVSwitch.ini
+     - /data/YSF/MMDVM_Bridge.ini:/data/MMDVM_Bridge.ini
+     - /data/YSF/DVSwitch.ini:/data/DVSwitch.ini
     hostname: YSF_MMDVM_Bridge
     networks:
       ysf:
@@ -27,9 +27,9 @@ services:
     image: w3fur/ysf_reflector:alpine
     restart: unless-stopped
     ports:
-    - 42000:42000/udp
+     - 42000:42000/udp
     volumes:
-    - /data/YSF/YSFReflector.ini:/data/YSFReflector.ini
+     - /data/YSF/YSFReflector.ini:/data/YSFReflector.ini
     hostname: YSFReflector
     networks:
       ysf:
@@ -54,3 +54,4 @@ networks:
   nxdn:
     name: nxdn
     external: true
+

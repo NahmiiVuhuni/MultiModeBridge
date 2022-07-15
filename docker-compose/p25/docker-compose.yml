@@ -4,7 +4,7 @@ services:
     image: w3fur/analog_bridge
     restart: unless-stopped
     volumes:
-    - /data/P25/Analog_Bridge.ini:/data/Analog_Bridge.ini
+     - /data/P25/Analog_Bridge.ini:/data/Analog_Bridge.ini
     hostname: P25_Analog_Bridge
     networks:
       main:
@@ -16,8 +16,8 @@ services:
     image: w3fur/mmdvm_bridge
     restart: unless-stopped
     volumes:
-    - /data/P25/MMDVM_Bridge.ini:/data/MMDVM_Bridge.ini
-    - /data/P25/DVSwitch.ini:/data/DVSwitch.ini
+     - /data/P25/MMDVM_Bridge.ini:/data/MMDVM_Bridge.ini
+     - /data/P25/DVSwitch.ini:/data/DVSwitch.ini
     hostname: P25_MMDVM_Bridge
     networks:
       p25:
@@ -27,8 +27,8 @@ services:
     image: w3fur/p25_gateway:alpine
     restart: unless-stopped
     volumes:
-    - /data/P25/P25Gateway.ini:/data/P25Gateway.ini
-    - /data/P25/P25Hosts-private.txt:/data/private/P25Hosts.txt
+     - /data/P25/P25Gateway.ini:/data/P25Gateway.ini
+     - /data/P25/P25Hosts-private.txt:/data/private/P25Hosts.txt
     hostname: P25Gateway
     networks:
       p25:
@@ -38,9 +38,9 @@ services:
     image: w3fur/p25_reflector:alpine
     restart: unless-stopped
     ports:
-    - 41000:41000/udp
+     - 41000:41000/udp
     volumes:
-    - /data/P25/P25Reflector.ini:/data/P25Reflector.ini
+     - /data/P25/P25Reflector.ini:/data/P25Reflector.ini
     hostname: P25Reflector
     networks:
       p25:
@@ -52,3 +52,4 @@ networks:
   p25:
     name: p25
     external: true
+

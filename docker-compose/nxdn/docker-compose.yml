@@ -4,8 +4,8 @@ services:
     image: w3fur/mmdvm_bridge
     restart: unless-stopped
     volumes:
-    - /data/NXDN/MMDVM_Bridge.ini:/data/MMDVM_Bridge.ini
-    - /data/NXDN/DVSwitch.ini:/data/DVSwitch.ini
+     - /data/NXDN/MMDVM_Bridge.ini:/data/MMDVM_Bridge.ini
+     - /data/NXDN/DVSwitch.ini:/data/DVSwitch.ini
     hostname: NXDN_MMDVM_Bridge
     networks:
       nxdn:
@@ -15,8 +15,8 @@ services:
     image: w3fur/nxdn_gateway:alpine
     restart: unless-stopped
     volumes:
-    - /data/NXDN/NXDNGateway.ini:/data/NXDNGateway.ini
-    - /data/NXDN/NXDNHosts-private.txt:/data/private/NXDNHosts.txt
+     - /data/NXDN/NXDNGateway.ini:/data/NXDNGateway.ini
+     - /data/NXDN/NXDNHosts-private.txt:/data/private/NXDNHosts.txt
     hostname: NXDNGateway
     networks:
       nxdn:
@@ -26,9 +26,9 @@ services:
     image: w3fur/nxdn_reflector:alpine
     restart: unless-stopped
     ports:
-    - 41400:41400/udp
+     - 41400:41400/udp
     volumes:
-    - /data/NXDN/NXDNReflector.ini:/data/NXDNReflector.ini
+     - /data/NXDN/NXDNReflector.ini:/data/NXDNReflector.ini
     hostname: NXDNReflector
     networks:
       nxdn:
@@ -37,3 +37,4 @@ networks:
   nxdn:
     name: nxdn
     external: true
+

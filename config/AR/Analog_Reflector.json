@@ -10,12 +10,12 @@
   "siteroot": "./arRoot",
   "logFileName": "/var/log/dvswitch/Analog_Reflector.log",
   "logLevel": "2",
-  "disallowUnknownClients": false,
+  "disallowUnknownClients": true,
   "brokerURL": "mqtt://localhost:1883",
-  "rightsMask": "4",
+  "rightsMask": "0",
   "autoMute": false,
   "clientDebugMode": false,
-  "clientModes": ["Intercom", "DMR", "STFU", "DSTAR|D-Star", "NXDN", "P25", "YSF", "ASL|AllStar", "M17"],
+  "clientModes": ["Intercom", "ASL|AllStar", "M17", "P25", "YSF", "NXDN", "DSTAR|D-Star", "STFU"],
   "bridges": {
     "asl": [
       {"node" : "57291", "address" : "172.19.40.254", "rxPort" : "34001", "txPort" : "32001", "rights" : 3, "amiUserName" : "admin", "amiSecret" : "nottelling", "amiPort" : "5038"}
