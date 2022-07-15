@@ -11,8 +11,13 @@ services:
     networks:
       main:
         ipv4_address: 172.19.40.1
+      web:
+        ipv4_address: 172.19.50.40
 networks:
   main:
     name: main
+    external: true
+  web:
+    name: web
     external: true
 

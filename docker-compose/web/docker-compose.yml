@@ -11,14 +11,12 @@ services:
      - /data/web/www:/var/www
     hostname: web_nginx
     ports:
-     - 80:80
      - 443:443
-     - 8080:8080
-     - 8443:8443
+     - 12345:12345
      - 17000:17000
-    networks:
-      web:
-        ipv4_address: 172.19.50.1
+    networks:  
+      main:
+        ipv4_address: 172.19.40.201
 networks:
   web:
     name: web
