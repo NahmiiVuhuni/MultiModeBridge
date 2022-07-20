@@ -37,4 +37,3 @@ networks:
   nxdn:
     name: nxdn
     external: true
-

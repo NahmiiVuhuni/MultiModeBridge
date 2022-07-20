@@ -1,6 +1,6 @@
 {
   "nodeName":"DVSwitch",
-  "dmrID":"3191287",
+  "dmrID":"313099",
   "abAddress": "127.0.0.1",
   "usrpTxPort": "0", 
   "usrpRxPort": "0",
@@ -10,20 +10,21 @@
   "siteroot": "./arRoot",
   "logFileName": "/var/log/dvswitch/Analog_Reflector.log",
   "logLevel": "2",
-  "disallowUnknownClients": true,
+  "disallowUnknownClients": false,
   "brokerURL": "mqtt://localhost:1883",
-  "rightsMask": "0",
+  "rightsMask": "3",
   "autoMute": false,
   "clientDebugMode": false,
   "clientModes": ["Intercom", "ASL|AllStar", "M17", "P25", "YSF", "NXDN", "DSTAR|D-Star", "STFU"],
   "bridges": {
     "asl": [
-      {"node" : "57291", "address" : "172.19.40.254", "rxPort" : "34001", "txPort" : "32001", "rights" : 3, "amiUserName" : "admin", "amiSecret" : "nottelling", "amiPort" : "5038"}
+      {"node" : "572913", "address" : "172.19.40.254", "rxPort" : "34001", "txPort" : "32001", "rights" : 3, "amiUserName" : "admin", "amiSecret" : "nottelling", "amiPort" : "5038"}
     ],
     "ab" : [
-      {"name" : "YSF", "address" : "172.19.40.41", "rxPort" : "51103", "txPort" : "51100", "rights" : 1},
-      {"name" : "P25", "address" : "172.19.40.42", "rxPort" : "52103", "txPort" : "52100", "rights" : 1},
-      {"name" : "M17", "address" : "172.19.40.44", "rxPort" : "54103", "txPort" : "54100", "rights" : 1}
+      {"name" : "YSF", "address" : "172.19.40.41", "rxPort" : "51103", "txPort" : "51100", "rights" : 3},
+      {"name" : "P25", "address" : "172.19.40.42", "rxPort" : "52103", "txPort" : "52100", "rights" : 3},
+      {"name" : "M17", "address" : "172.19.40.44", "rxPort" : "54103", "txPort" : "54100", "rights" : 3},
+      {"name" : "DMR", "address" : "172.19.40.45", "rxPort" : "55103", "txPort" : "55100", "rights" : 3}
     ]
   }
 }

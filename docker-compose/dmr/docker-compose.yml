@@ -1,0 +1,40 @@
+services:
+  dmr_analog_bridge:
+    container_name: DMR-Analog_Bridge
+    image: w3fur/analog_bridge
+    restart: unless-stopped
+    volumes:
+     - /data/DMR/Analog_Bridge.ini:/data/Analog_Bridge.ini
+    hostname: DMR_Analog_Bridge
+    networks:
+      main:
+        ipv4_address: 172.19.40.45
+      dmr:
+        ipv4_address: 172.19.45.1
+  dmr_mmdvm_bridge:
+    container_name: DMR-MMDVM_Bridge
+    image: w3fur/mmdvm_bridge
+    restart: unless-stopped
+    volumes:
+     - /data/DMR/MMDVM_Bridge.ini:/data/MMDVM_Bridge.ini
+     - /data/DMR/DVSwitch.ini:/data/DVSwitch.ini
+    hostname: DMR_MMDVM_Bridge
+    networks:
+      dmr:
+        ipv4_address: 172.19.45.2
+  dmr_md380emu:
+    container_name: DMR-MD380emu
+    image: w3fur/md380emu:alpine
+    restart: unless-stopped
+    hostname: DMR_MD380emu
+    networks:
+      dmr:
+        ipv4_address: 172.19.45.11
+networks:
+  main:
+    name: main
+    external: true
+  dmr:
+    name: dmr
+    external: true
+

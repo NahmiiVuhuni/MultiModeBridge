@@ -52,4 +52,3 @@ networks:
   p25:
     name: p25
     external: true
-

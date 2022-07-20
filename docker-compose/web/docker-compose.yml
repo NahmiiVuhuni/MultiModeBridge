@@ -14,11 +14,10 @@ services:
      - 443:443
      - 12345:12345
      - 17000:17000
-    networks:  
-      main:
-        ipv4_address: 172.19.40.201
+    networks:
+      web:
+        ipv4_address: 172.19.50.1
 networks:
   web:
     name: web
     external: true
-
